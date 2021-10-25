@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/24 14:47:19 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:04:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,6 @@ size_t	ft_strlen(const char *s)
 	while (*p != '\0')
 		p++;
 	return ((size_t)(p - s));
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void			*p;
-	unsigned char	*cast_p;
-
-	p = malloc(nmemb * size);
-	if (nmemb == 0 || size == 0)
-		return (p);
-	if (!p)
-		return (NULL);
-	cast_p = (unsigned char *)(p);
-	while (size > 0)
-	{
-		*cast_p = '\0';
-		cast_p++;
-		size--;
-	}
-	return (p);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -100,4 +80,20 @@ void	*ft_memmove(void *dest, const void *src, size_t size)
 		}
 	}
 	return (dest);
+}
+
+char	*get_line_break(char **buffer, char **backup)
+{
+	char	*new_line;
+	char	*aux;
+
+	new_line = ft_strchr(*buffer, '\n');
+	if (new_line)
+	{
+		*backup = ft_strndup(new_line + 1, ft_strlen(new_line + 1));
+		aux = ft_strndup(*buffer, new_line - *buffer);
+		free(*buffer);
+		return (aux);
+	}
+	return (*buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/24 14:49:26 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:04:44 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strndup(const char *s, size_t size);
-void	*ft_calloc(size_t nmemb, size_t size);
+char	*get_line_break(char **buffer, char **backup);
 void	*ft_memmove(void *dest, const void *src, size_t size);
 
 #endif
