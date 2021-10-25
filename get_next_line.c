@@ -6,27 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/25 14:03:55 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:05:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*get_line_break(char **buffer, char **backup)
-{
-	char	*new_line;
-	char	*aux;
-
-	new_line = ft_strchr(*buffer, '\n');
-	if (new_line)
-	{
-		*backup = ft_strndup(new_line + 1, ft_strlen(new_line + 1));
-		aux = ft_strndup(*buffer, new_line - *buffer);
-		free(*buffer);
-		return (aux);
-	}
-	return (*buffer);
-}
 
 char	*get_next_line(int fd)
 {
