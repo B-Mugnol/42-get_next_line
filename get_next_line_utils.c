@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/22 19:25:20 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/24 14:47:19 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@ size_t	ft_strlen(const char *s)
 	while (*p != '\0')
 		p++;
 	return ((size_t)(p - s));
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void			*p;
+	unsigned char	*cast_p;
+
+	p = malloc(nmemb * size);
+	if (nmemb == 0 || size == 0)
+		return (p);
+	if (!p)
+		return (NULL);
+	cast_p = (unsigned char *)(p);
+	while (size > 0)
+	{
+		*cast_p = '\0';
+		cast_p++;
+		size--;
+	}
+	return (p);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -44,7 +64,7 @@ char	*ft_strndup(const char *s, size_t size)
 	size_t	len;
 
 	len = 0;
-	while (s + len != '\0' && len < size)
+	while (*(s + len) != '\0' && len < size)
 		len++;
 	dest = malloc((len + 1) * sizeof (char));
 	if (!dest)
