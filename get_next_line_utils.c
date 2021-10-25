@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/25 14:04:26 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/25 17:45:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ size_t	ft_strlen(const char *s)
 {
 	const char	*p;
 
+	// if (!s) return (0);
 	p = s;
 	while (*p != '\0')
 		p++;
@@ -26,6 +27,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	cast_c;
 
+	if (!s)
+		return (NULL);
 	cast_c = (char)(c);
 	while (*s != '\0')
 	{
@@ -49,7 +52,24 @@ char	*ft_strndup(const char *s, size_t size)
 	dest = malloc((len + 1) * sizeof (char));
 	if (!dest)
 		return (NULL);
-	dest = ft_memmove(dest, s, len + 1);
+	dest = ft_memmove(dest, s, len);
+	*(dest + len) = '\0';
+	return (dest);
+}
+
+char	*ft_strdup_nl(const char *s)
+{
+	char	*dest;
+	size_t	len;
+
+	len = 0;
+	while (*(s + len) != '\0')
+		len++;
+	dest = malloc((len + 2) * sizeof (char));
+	if (!dest)
+		return (NULL);
+	dest = ft_memmove(dest, s, len);
+	*(dest + len) = '\n';
 	*(dest + len + 1) = '\0';
 	return (dest);
 }
@@ -82,18 +102,3 @@ void	*ft_memmove(void *dest, const void *src, size_t size)
 	return (dest);
 }
 
-char	*get_line_break(char **buffer, char **backup)
-{
-	char	*new_line;
-	char	*aux;
-
-	new_line = ft_strchr(*buffer, '\n');
-	if (new_line)
-	{
-		*backup = ft_strndup(new_line + 1, ft_strlen(new_line + 1));
-		aux = ft_strndup(*buffer, new_line - *buffer);
-		free(*buffer);
-		return (aux);
-	}
-	return (*buffer);
-}
