@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/25 17:49:19 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:21:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static char	*get_line_break(char **buffer, char **backup);
 char	*get_next_line(int fd)
 {
 	static char	*backup;
+	// static int	is_first_l = 1;
 	char		*buffer;
+	char		*aux;
 	ssize_t		read_val;
 
 	if (backup && *backup)
@@ -38,8 +40,15 @@ char	*get_next_line(int fd)
 		free(backup);
 		return (NULL);
 	}
-	while (read_val < BUFFER_SIZE)
-		*(buffer + read_val++) = '\0';
+	if (read_val < BUFFER_SIZE)
+	{
+		while (read_val < BUFFER_SIZE)
+			*(buffer + read_val++) = '\0';
+		aux = ft_strndup(buffer, ft_strlen(buffer));
+		free(buffer);
+		return (aux);
+	}
+	// write(1, buffer, BUFFER_SIZE);
 	return (get_line_break(&buffer, &backup));
 }
 
@@ -58,9 +67,7 @@ static char	*get_line_break(char **buffer, char **backup)
 	if (new_line)
 	{
 		aux_backup = ft_strndup(new_line + 1, ft_strlen(new_line + 1));
-		if (new_line == curr_buffer)
-			aux = ft_strndup(curr_buffer, 1);
-		else if (new_line == curr_buffer + ft_strlen(curr_buffer) - 1)
+		if (new_line == curr_buffer + ft_strlen(curr_buffer) - 1)
 		{
 			aux = ft_strndup(curr_buffer, new_line - curr_buffer + 1);
 			if (curr_buffer != *backup)
@@ -69,6 +76,8 @@ static char	*get_line_break(char **buffer, char **backup)
 			*backup = NULL;
 			return (aux);
 		}
+		else if (new_line == curr_buffer)
+			aux = ft_strndup(curr_buffer, 1);
 		else
 			aux = ft_strndup(curr_buffer, new_line - curr_buffer);
 		if (curr_buffer != *backup)
