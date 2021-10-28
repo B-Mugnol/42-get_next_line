@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/25 22:47:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/27 00:06:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ size_t	ft_strlen(const char *s)
 {
 	const char	*p;
 
-	// if (!s) return (0);
 	p = s;
 	while (*p != '\0')
 		p++;
@@ -41,6 +40,25 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+char	*ft_strnjoin(char const *s1, char const *s2, size_t s1_len, size_t s2_len)
+{
+	char	*s3;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = malloc((s1_len + s2_len + 1) * sizeof (char));
+	if (!s3)
+		return (NULL);
+	// while (*s1 != '\0')
+	// 	*(s3 + i++) = *s1++;
+	ft_memmove(s3, s1, s1_len);
+	// while (*s2 != '\0' && j++ < s2_len)
+	// 	*(s3 + i++) = *s2++;
+	ft_memmove(s3 + s1_len, s2, s2_len);
+	*(s3 + s1_len + s2_len) = '\0';
+	return (s3);
+}
+
 char	*ft_strndup(const char *s, size_t size)
 {
 	char	*dest;
@@ -54,23 +72,6 @@ char	*ft_strndup(const char *s, size_t size)
 		return (NULL);
 	dest = ft_memmove(dest, s, len);
 	*(dest + len) = '\0';
-	return (dest);
-}
-
-char	*ft_strdup_nl(const char *s)
-{
-	char	*dest;
-	size_t	len;
-
-	len = 0;
-	while (*(s + len) != '\0')
-		len++;
-	dest = malloc((len + 2) * sizeof (char));
-	if (!dest)
-		return (NULL);
-	dest = ft_memmove(dest, s, len);
-	*(dest + len) = '\n';
-	*(dest + len + 1) = '\0';
 	return (dest);
 }
 
@@ -101,4 +102,3 @@ void	*ft_memmove(void *dest, const void *src, size_t size)
 	}
 	return (dest);
 }
-
