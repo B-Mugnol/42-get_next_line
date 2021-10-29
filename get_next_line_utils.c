@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/27 00:06:29 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:21:56 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ char	*ft_strnjoin(char const *s1, char const *s2, size_t s1_len, size_t s2_len)
 	s3 = malloc((s1_len + s2_len + 1) * sizeof (char));
 	if (!s3)
 		return (NULL);
-	// while (*s1 != '\0')
-	// 	*(s3 + i++) = *s1++;
 	ft_memmove(s3, s1, s1_len);
-	// while (*s2 != '\0' && j++ < s2_len)
-	// 	*(s3 + i++) = *s2++;
 	ft_memmove(s3 + s1_len, s2, s2_len);
 	*(s3 + s1_len + s2_len) = '\0';
 	return (s3);
