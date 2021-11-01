@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/29 19:11:15 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/01 14:41:49 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	const char	*p;
 
+	if (!s)
+		return (0);
 	p = s;
 	while (*p != '\0')
 		p++;
@@ -26,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	cast_c;
 
-	if (!s || !*s)
+	if (!s) // || !*s
 		return (NULL);
 	cast_c = (char)(c);
 	while (*s != '\0')
@@ -60,6 +62,8 @@ char	*ft_strndup(const char *s, size_t size)
 	char	*dest;
 	size_t	len;
 
+	if (!s)
+		return (NULL);
 	len = 0;
 	while (*(s + len) != '\0' && len < size)
 		len++;

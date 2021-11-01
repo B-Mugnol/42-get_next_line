@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/28 13:42:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:06:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
-// typedef struct s_backup
-// {
-// 	int		fd;
-// 	char	*remainder;
-// }	t_backup;
-
+//
+#include <stdio.h>
 char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *s);
