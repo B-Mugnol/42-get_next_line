@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/29 15:16:30 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/01 13:33:57 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ static char	*do_thing(char **acc)
 	char	*result;
 	char	*aux;
 
-	if (*acc && **acc)
+	// write(1, "00", 2);
+	if (!*acc || !**acc)
+		return (NULL);
+	// acc isn't properly null terminated
+	acc_nl = ft_strchr(*acc, '\n');
+	if (acc_nl)
 	{
-		acc_nl = ft_strchr(*acc, '\n');
 		aux = ft_strndup(acc_nl + 1, ft_strlen(acc_nl + 1));
 		result = ft_strndup(*acc, acc_nl - *acc + 1);
 		free(*acc);
@@ -63,7 +67,7 @@ char	*get_next_line(int fd)
 	char		*aux;
 
 	aux = do_thing(&backup);
-	if (aux)
+	if (aux && *aux)
 		return (aux);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
@@ -104,33 +108,32 @@ static char	*build_line(int fd, char **acc, char **buffer, size_t buffer_len)
 	{
 		if (nl == *buffer)
 		{
-			write(1, "1: ", 3);
+			// write(1, "1: ", 3);
 			aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), 1);
 			free(*acc);
 			*acc = ft_strndup(nl + 1, ft_strlen(nl + 1));
 		}
 		else if (*(nl + 1) != '\0')
 		{
-			write(1, "2: ", 3);
+			// write(1, "2: ", 3);
 			aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), nl - *buffer + 1);
 			free(*acc);
 			*acc = ft_strndup(nl + 1, ft_strlen(nl + 1));
 		}
 		else if (*(nl + 1) == '\0')
 		{
-			write(1, "3: ", 3);
+			// write(1, "3: ", 3);
 			aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), buffer_len);
 			free(*acc);
 		}
 		else
 		{
-			write(1, "4: ", 3);
+			// write(1, "4: ", 3);
 			aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), nl - *buffer + 1);
 			free(*acc);
 		}
 		free(*buffer);
-		write(1, "oie", 3);
-
+		// write(1, "out", 3);
 		return (aux);
 	}
 	else
@@ -138,8 +141,6 @@ static char	*build_line(int fd, char **acc, char **buffer, size_t buffer_len)
 		// write(1, "5: ", 3);
 		aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), buffer_len);
 		free(*acc);
-		// if (*buffer && **buffer)
-		// 	free(*buffer);
 		free(*buffer);
 		*buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (!*buffer)

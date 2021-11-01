@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/10/28 18:21:56 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/10/29 19:11:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	cast_c;
 
-	if (!s)
+	if (!s || !*s)
 		return (NULL);
 	cast_c = (char)(c);
 	while (*s != '\0')
