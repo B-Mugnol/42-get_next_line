@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/03 14:26:13 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/03 18:49:47 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	*do_thing(char **acc)
 		// null_free(acc);
 		free(*acc);
 		*acc = ft_strndup(aux, ft_strlen(aux));
-		// null_free(&aux);
 		free(aux);
 		return (result);
 	}
@@ -81,17 +80,34 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	read_val = read(fd, buffer, BUFFER_SIZE);
-	if (read_val <= 0 || fd < 0)
+	// printf("-%li-", read_val);
+	if (read_val < 0 || fd < 0)
 	{
-		null_free(&buffer);
-		// free(buffer);
+		// null_free(&buffer);
+		free(buffer);
 		// write(1, "@", 1);
 		if (backup)
 			null_free(&backup);
 			// free(backup);
 		return (NULL);
 	}
+	if (read_val == 0)
+	{
+		if (backup && ft_strlen(backup))
+		{
+			free(buffer);
+			aux = ft_strndup(backup, ft_strlen(backup));
+			null_free(&backup);
+			return (aux);
+		}
+		free(buffer);
+		if (backup)
+			null_free(&backup);
+		return (NULL);
+	}
 	*(buffer + read_val) = '\0';
+	// aux = build_line(fd, &backup, &buffer, read_val);
+	// return (aux);
 	return (build_line(fd, &backup, &buffer, read_val));
 }
 
@@ -138,53 +154,50 @@ static char	*build_line(int fd, char **acc, char **buffer, size_t buffer_len)
 		}
 		// null_free(buffer);
 		free(*buffer);
-		// write(1, "out", 3);
 		return (aux);
 	}
 	else
 	{
 		// write(1, "5: ", 3);
 		aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), buffer_len);
-		// printf("\\%lu/", ft_strlen(aux));
-		// null_free(acc);
-		free(*acc);
-		// null_free(buffer);
+		null_free(acc);
+		// free(*acc);
 		free(*buffer);
+		*acc = ft_strndup(aux, ft_strlen(aux));
+		free(aux);
+		// null_free(&aux);
 		*buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (!*buffer)
 			return (NULL);
-		*acc = ft_strndup(aux, ft_strlen(aux));
-		// null_free(&aux);
-		free(aux);
 		read_val = read(fd, *buffer, BUFFER_SIZE);
 		if (read_val < 0 || fd < 0)
 		{
 			// null_free(buffer);
 			free(*buffer);
-			null_free(acc);
+			// if (*acc)///////////
+				null_free(acc);
 			// free(*acc);
 			return (NULL);
 		}
 		*(*buffer + read_val) = '\0';
 		if (read_val == 0 && *acc) //  && **acc
 		{
-			// null_free(buffer);
 			free(*buffer);
-			return (*acc);
+			aux = ft_strndup(*acc, ft_strlen(*acc));
+			null_free(acc);
+			return (aux);
 		}
 		if (read_val == 0)
 		{
-			// null_free(buffer);
 			free(*buffer);
-			null_free(acc);
+			if (*acc)////
+				null_free(acc);
 			// free(*acc);
 			return (NULL);
 		}
 		if (read_val < BUFFER_SIZE)
 		{
-			// *(*buffer + read_val) = '\0';
 			aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), read_val);
-			// null_free(buffer);
 			free(*buffer);
 			null_free(acc);
 			// free(*acc);
