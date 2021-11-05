@@ -6,4 +6,5 @@ Makefile
 gnlTester
 42TESTERS-GNL
 *old*
+*new*
 valgrind-out.txt
