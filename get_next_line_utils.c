@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/05 15:57:41 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:08:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_strnjoin(char *s1, char *s2, size_t s1_len, size_t s2_len)
 		*(s3 + i++) = *s1++;
 	while (*s2 != '\0' && j++ < s2_len)
 		*(s3 + i++) = *s2++;
-	*(s3 + s1_len + s2_len) = '\0';
+	*(s3 + i) = '\0';
 	return (s3);
 }
 
@@ -89,6 +89,6 @@ char	*ft_strndup(const char *s, size_t size)
 		*(dest + i) = *(s + i);
 		i++;
 	}
-	*(dest + len) = '\0';
+	*(dest + i) = '\0';
 	return (dest);
 }
