@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/05 17:04:20 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:15:24 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	*get_next_line(int fd)
 static char	*build_line(int fd, char **acc, char **buffer, size_t b_len)
 {
 	char		*aux;
-	ssize_t		read_val;
 
 	aux = nl_in_buffer(acc, buffer, b_len);
 	if (aux)
@@ -85,26 +84,7 @@ static char	*build_line(int fd, char **acc, char **buffer, size_t b_len)
 	free(*buffer);
 	*acc = ft_strndup(aux, ft_strlen(aux));
 	free(aux);
-	read_val = validated_read(fd, acc, buffer);
-	if (read_val < 0)
-		return (NULL);
-	if (read_val == 0)
-	{
-		free(*buffer);
-		aux = NULL;
-		if (*acc)
-			aux = ft_strndup(*acc, ft_strlen(*acc));
-		null_free(acc);
-		return (aux);
-	}
-	if (read_val < BUFFER_SIZE)
-	{
-		aux = ft_strnjoin(*acc, *buffer, ft_strlen(*acc), read_val);
-		free(*buffer);
-		null_free(acc);
-		return (aux);
-	}
-	return (build_line(fd, acc, buffer, read_val));
+	return (get_next_line(fd));
 }
 
 static ssize_t	validated_read(int fd, char **acc, char **buffer)
