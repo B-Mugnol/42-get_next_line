@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/09 15:20:17 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:02:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+# endif
+
+# ifndef MAX_FD
+#  define MAX_FD 256
 # endif
 
 # include <stdlib.h>
