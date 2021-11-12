@@ -1,10 +1,2 @@
-main.c
-*.o
-run
-Makefile
-/test_files
-gnlTester
-42TESTERS-GNL
-*old*
-*new*
-valgrind-out.txt
+*
+!get_next_line*.*
