@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:22:36 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/10 15:04:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:27:59 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static ssize_t	validated_read(int fd, char **acc, char **buffer);
 
 char	*get_next_line(int fd)
 {
-	static char	*backup = NULL;
+	static char	*backup;
 	char		*buffer;
 	ssize_t		read_val;
 	char		*aux;
