@@ -6,17 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:18:49 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/12 14:59:54 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:01:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-char	*get_next_line(int fd);
-char	*build_line(int fd, char **acc, char **buffer, size_t buffer_len);
-char	*nl_in_backup(char **acc);
-char	*nl_in_buffer(char **acc, char **buffer);
-ssize_t	validated_read(int fd, char **acc, char **buffer);
 
 char	*get_next_line(int fd)
 {
