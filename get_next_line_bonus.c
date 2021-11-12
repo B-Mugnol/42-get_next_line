@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:18:49 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/12 13:30:29 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:54:24 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@ static ssize_t	validated_read(int fd, char **acc, char **buffer);
 
 char	*get_next_line(int fd)
 {
-	static char	*backup = NULL;
+	static char	*backup[MAX_FD];
 	char		*buffer;
 	ssize_t		read_val;
 	char		*aux;
 
-	aux = nl_in_backup(&backup);
+	if (fd < 0 || fd > MAX_FD)
+		return (NULL);
+	aux = nl_in_backup(backup + fd);
 	if (aux)
 		return (aux);
-	read_val = validated_read(fd, &backup, &buffer);
+	read_val = validated_read(fd, backup + fd, &buffer);
 	if (read_val < 0)
 		return (NULL);
 	if (read_val == 0)
 	{
 		aux = NULL;
-		if (backup && ft_strlen(backup))
-			aux = ft_strndup(backup, ft_strlen(backup));
-		if (backup)
-			null_free(&backup);
+		if (backup + fd && ft_strlen(*(backup + fd)))
+			aux = ft_strndup(*(backup + fd), ft_strlen(*(backup + fd)));
+		if (backup + fd)
+			null_free(backup + fd);
 		free(buffer);
 		return (aux);
 	}
-	return (build_line(fd, &backup, &buffer, read_val));
+	return (build_line(fd, backup + fd, &buffer, read_val));
 }
 
 static char	*build_line(int fd, char **acc, char **buffer, size_t b_len)
