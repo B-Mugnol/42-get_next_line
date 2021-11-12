@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:18:55 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/12 13:20:00 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:30:34 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	null_free(char **p)
 {

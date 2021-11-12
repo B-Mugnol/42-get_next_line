@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:18:49 by bmugnol-          #+#    #+#             */
-/*   Updated: 2021/11/12 13:19:31 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:30:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char			*get_next_line(int fd);
 static char		*build_line(int fd, char **acc, char **buffer, size_t b_len);
